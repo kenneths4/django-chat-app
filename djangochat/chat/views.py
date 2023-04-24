@@ -7,4 +7,11 @@ from .models import Chat
 def chats(request):
     chats = Chat.objects.all
 
-    return render(request, "chats.html", {"chats" : chats})
+    return render(request, "chat/chats.html", {"chats" : chats})
+
+
+@login_required
+def chat(request, slug):
+    chat = Chat.objects.get(slug=slug)
+
+    return render(request, "chat/chat.html", {"chat" : chat})
