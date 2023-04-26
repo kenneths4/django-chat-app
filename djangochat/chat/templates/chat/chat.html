@@ -45,3 +45,30 @@
 </div>
 
 {% endblock %}
+
+{% block scripts %}
+{{ chat.slug | json_script:"json-chatname"}}
+
+<script>
+    const chatName = JSON.parse(document.getElementById("json-chatname").textContent);
+    const chatSocket = new WebSocket(
+        "ws://"
+        + window.location.host
+        + "/ws/"
+        + chatName
+        + "/"
+    );
+
+    chatSocket.onopen = function(e) {
+        console.log("[open] Connection established");
+    };
+
+     chatSocket.onmessage = function(e){
+        console.log("on message");
+     };
+
+     chatSocket.onclose = function(e){
+        console.log("on close");
+     }
+</script>
+{% endblock %}

@@ -73,7 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'djangochat.wsgi.application'
-ASGI_APPLICATION = 'djangochat.a sgi.application'
+ASGI_APPLICATION = 'djangochat.asgi.application'
 
 # change this to use database in production
 CHANNEL_LAYERS = {
