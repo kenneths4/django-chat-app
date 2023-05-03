@@ -4,12 +4,12 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = "chat_%s" % self.room_name 
+        self.chat_name = self.scope["url_route"]["kwargs"]["chat_name"]
+        self.chat_group_name = "chat_%s" % self.chat_name 
 
         # add group to channel layers
         await self.channel_layer.group_add(
-            self.room_group_name,
+            self.chat_group_name,
             self.channel_name
         )
 
@@ -18,7 +18,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, code):
         await self.channel_layer.group_discard(
-            self.room_group_name,
+            self.chat_group_name,
             self.channel_name
         )
 
@@ -30,7 +30,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         chat = data["chat"]
 
         await self.channel_layer.group_send(
-            self.room_group_name,
+            self.chat_group_name,
             {
                 "type": "chat_message",
                 "message":message,
