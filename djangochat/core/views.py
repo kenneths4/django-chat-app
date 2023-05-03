@@ -22,5 +22,3 @@ def signup(request):
 
     return render(request, "core/signup.html", {"form": form})
 
-def chats(request):
-    return render(request, "chat/chats.html")
