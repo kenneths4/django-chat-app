@@ -20,5 +20,5 @@ def chats(request):
 def chat(request, slug):
     chat = Chat.objects.get(slug=slug)
 
-    messages = Message.objects.filter(chat=chat)[0:25][::-1]
+    messages = Message.objects.filter(chat=chat)[0:25]
     return render(request, "chat/chat.html", {'chat' : chat, 'messages': messages})
