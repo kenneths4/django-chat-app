@@ -70,6 +70,8 @@
         }else{
             alert("The message is empty");
         }
+
+        scrollToBottom();
     };
 
     chatSocket.onclose = function(e){
@@ -97,6 +99,11 @@
         
     }
 
+    function scrollToBottom(){
+        const objDiv = document.querySelector("#chat-messages");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
 
+    scrollToBottom();
 </script>
 {% endblock %}
